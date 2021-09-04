@@ -178,6 +178,11 @@ class ImagesGramplet(Gramplet):
         # Get all media for person
         self.process_media('person', active, active.get_media_list())
 
+        # Get all media for person citations
+        for cit_handle in active.get_citation_list():
+            cit = self.dbstate.db.get_citation_from_handle(cit_handle)
+            self.process_media('citation', cit, cit.get_media_list())
+
         # Get all media for citations
         for event_ref in active.get_event_ref_list():
             event_handle = event_ref.get_reference_handle()
